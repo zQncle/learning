@@ -17,6 +17,7 @@ features, labels = synthetic_data(true_w, true_b, 1000)
 print('features:', features[0], '\nlabel:', labels[0])
 d2l.set_figsize()
 d2l.plt.scatter(features[:, (1)].detach().numpy(), labels.detach().numpy(), 1)
+# 显示模型结果
 d2l.plt.show()
 
 
@@ -57,6 +58,7 @@ def sgd(params, lr, batch_size):
         for param in params:
             param -= lr * param.grad / batch_size
             param.grad.zero_()
+
 
 """训练过程"""
 lr = 0.03
