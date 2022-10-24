@@ -33,3 +33,33 @@ class MLP(nn.Module):
 X = torch.rand(2, 20)
 net = MLP()
 print(net(X))
+
+
+'''
+顺序快
+'''
+
+
+class MySequential(nn.Module):
+    def __init__(self, *args):
+        super().__init__()
+        for block in args:
+            self._modules[block] = block
+
+    def forward(self, X):
+        for block in self._modules.values():
+            X = block(X)
+        return X
+
+
+net = MySequential(nn.Linear(20, 256),
+                   nn.ReLU(),
+                   nn.Linear(256, 10))
+X = torch.rand(2, 20)
+net(X)
+print(X)
+
+
+'''
+在正向传播函数中执行的代码
+'''
