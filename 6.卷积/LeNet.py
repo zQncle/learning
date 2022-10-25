@@ -61,7 +61,6 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
         # 训练损失之和，训练准确率之和，样本数
         metric = d2l.Accumulator(3)
         net.train()
-
         for i, (X, y) in enumerate(train_iter):
             timer.start()
             optimizer.zero_grad()
