@@ -67,6 +67,7 @@ def train_ch6(net, train_iter, test_iter, num_epochs, lr, device):
             X, y = X.to(device), y.to(device)
             y_hat = net(X)
             l = loss(y_hat, y)
+
             l.backward()
             optimizer.step()
             with torch.no_grad():
