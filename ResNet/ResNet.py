@@ -29,13 +29,13 @@ class Residual(nn.Module):  #@save
         return F.relu(Y)
 
 
-blk = Residual(3, 3)
-X = torch.rand(4, 3, 6, 6)
-Y = blk(X)
-print(Y.shape)
-blk = Residual(3, 6, use_1x1conv=True, strides=2)
-print(blk(X).shape)
-b1 = nn.Sequential(nn.Conv2d(1, 64, kernel_size=7, stride=2, padding=3),
+# blk = Residual(3, 3)
+# X = torch.rand(4, 3, 6, 6)
+# Y = blk(X)
+# print(Y.shape)
+# blk = Residual(3, 6, use_1x1conv=True, strides=2)
+# print(blk(X).shape)
+b1 = nn.Sequential(nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),
                    nn.BatchNorm2d(64), nn.ReLU(),
                    nn.MaxPool2d(kernel_size=3, stride=2, padding=1))
 
@@ -59,7 +59,7 @@ b5 = nn.Sequential(*resnet_block(256, 512, 2))
 net = nn.Sequential(b1, b2, b3, b4, b5,
                     nn.AdaptiveAvgPool2d((1, 1)),
                     nn.Flatten(), nn.Linear(512, 10))
-X = torch.rand(size=(1, 1, 224, 224))
+X = torch.rand(size=(1, 3, 224, 224))
 for layer in net:
     X = layer(X)
     print(layer.__class__.__name__, 'output shape:\t', X.shape)
