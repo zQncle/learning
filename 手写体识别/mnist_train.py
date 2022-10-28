@@ -55,6 +55,7 @@ class Net(nn.Module):
 
 
 net = Net()
+net.to(device="cuda")
 # [w1, b1, w2, b2, w3, b3]
 optimizer = optim.SGD(net.parameters(), lr=0.01, momentum=0.9)
 train_loss = []
